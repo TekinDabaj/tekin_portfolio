@@ -6,12 +6,14 @@ interface HomePageButtonProps {
   children: ReactNode;
   onClick?: () => void;
   className?: string;
+  compact?: boolean;
 }
 
 export default function HomePageButton({
   children,
   onClick,
   className = "",
+  compact = false,
 }: HomePageButtonProps) {
   return (
     <>
@@ -76,9 +78,27 @@ export default function HomePageButton({
           box-shadow: 0 0 0 2px #404040;
           transform: translate3d(0, 0, -1em);
         }
+
+        .learn-more.compact {
+          font-size: 11px;
+          padding: 0.6em 1.2em;
+          border-radius: 0.5em;
+        }
+
+        .learn-more.compact::before {
+          transform: translate3d(0, 0.5em, -0.6em);
+        }
+
+        .learn-more.compact:hover::before {
+          transform: translate3d(0, 0.35em, -0.6em);
+        }
+
+        .learn-more.compact:active::before {
+          transform: translate3d(0, 0, -0.6em);
+        }
       `}</style>
 
-      <button onClick={onClick} className={`learn-more ${className}`}>
+      <button onClick={onClick} className={`learn-more ${compact ? "compact" : ""} ${className}`}>
         {children}
       </button>
     </>

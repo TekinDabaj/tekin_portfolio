@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import HomePageButton from "./HomePageButton";
 
 interface HeaderProps {
   userEmail?: string;
@@ -146,34 +147,6 @@ export default function Header({ userEmail }: HeaderProps) {
           white-space: nowrap;
         }
 
-        .logout-btn {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.5rem 1rem;
-          font-family: "Montserrat", sans-serif;
-          font-size: 0.75rem;
-          font-weight: 600;
-          color: #ff6b6b;
-          background: rgba(255, 107, 107, 0.1);
-          border: 1px solid rgba(255, 107, 107, 0.2);
-          border-radius: 0.5rem;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .logout-btn:hover {
-          background: rgba(255, 107, 107, 0.15);
-          border-color: rgba(255, 107, 107, 0.4);
-          box-shadow: 0 0 20px rgba(255, 107, 107, 0.1);
-        }
-
-        .logout-icon {
-          width: 14px;
-          height: 14px;
-        }
       `}</style>
 
       <header className="header">
@@ -203,14 +176,7 @@ export default function Header({ userEmail }: HeaderProps) {
             </div>
             <span className="user-email">{userEmail || "User"}</span>
           </div>
-          <button className="logout-btn" onClick={handleLogout}>
-            <svg className="logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16,17 21,12 16,7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
-            Logout
-          </button>
+          <HomePageButton onClick={handleLogout} compact>Logout</HomePageButton>
         </div>
       </header>
     </>
