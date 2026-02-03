@@ -91,30 +91,41 @@ export default function Sidebar() {
         @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
         .sidebar {
-          width: 240px;
-          height: 100vh;
+          width: 72px;
+          height: calc(100vh - 64px);
           background: #0a0a0a;
           border-right: 1px solid rgba(255, 255, 255, 0.06);
           position: fixed;
-          top: 0;
+          top: 64px;
           left: 0;
           display: flex;
           flex-direction: column;
           z-index: 200;
+          transition: width 0.15s ease;
+          overflow: hidden;
+        }
+
+        .sidebar:hover {
+          width: 240px;
         }
 
         .sidebar-header {
-          padding: 1.25rem 1.25rem;
+          padding: 1.25rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          display: flex;
+          align-items: center;
+          min-height: 65px;
         }
 
         .logo {
           display: flex;
           align-items: center;
           gap: 0.75rem;
+          overflow: hidden;
         }
 
         .logo-icon {
+          min-width: 32px;
           width: 32px;
           height: 32px;
           background: linear-gradient(135deg, #00ffff 0%, #0088ff 100%);
@@ -122,6 +133,7 @@ export default function Sidebar() {
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-shrink: 0;
         }
 
         .logo-icon svg {
@@ -136,11 +148,19 @@ export default function Sidebar() {
           font-weight: 700;
           color: #ffffff;
           letter-spacing: -0.02em;
+          white-space: nowrap;
+          opacity: 0;
+          transition: opacity 0.15s ease;
+        }
+
+        .sidebar:hover .logo-text {
+          opacity: 1;
         }
 
         .sidebar-content {
           flex: 1;
           overflow-y: auto;
+          overflow-x: hidden;
           padding: 1rem 0;
         }
 
@@ -157,6 +177,17 @@ export default function Sidebar() {
           letter-spacing: 0.1em;
           padding: 0 1.25rem;
           margin-bottom: 0.5rem;
+          white-space: nowrap;
+          opacity: 0;
+          height: 0;
+          overflow: hidden;
+          transition: opacity 0.15s ease, height 0.15s ease, margin 0.15s ease;
+        }
+
+        .sidebar:hover .nav-section-title {
+          opacity: 1;
+          height: auto;
+          margin-bottom: 0.5rem;
         }
 
         .nav-item {
@@ -168,6 +199,7 @@ export default function Sidebar() {
           border-radius: 0.5rem;
           cursor: pointer;
           transition: all 0.15s ease;
+          position: relative;
         }
 
         .nav-item:hover {
@@ -187,10 +219,12 @@ export default function Sidebar() {
         }
 
         .nav-icon {
+          min-width: 18px;
           width: 18px;
           height: 18px;
           color: #666666;
           transition: color 0.15s ease;
+          flex-shrink: 0;
         }
 
         .nav-label {
@@ -198,8 +232,14 @@ export default function Sidebar() {
           font-size: 0.85rem;
           font-weight: 500;
           color: #888888;
-          transition: color 0.15s ease;
+          transition: color 0.15s ease, opacity 0.15s ease;
           flex: 1;
+          white-space: nowrap;
+          opacity: 0;
+        }
+
+        .sidebar:hover .nav-label {
+          opacity: 1;
         }
 
         .nav-badge {
@@ -210,11 +250,18 @@ export default function Sidebar() {
           background: rgba(0, 255, 255, 0.1);
           padding: 0.15rem 0.5rem;
           border-radius: 1rem;
+          opacity: 0;
+          transition: opacity 0.15s ease;
+        }
+
+        .sidebar:hover .nav-badge {
+          opacity: 1;
         }
 
         .sidebar-footer {
           padding: 1rem 1.25rem;
           border-top: 1px solid rgba(255, 255, 255, 0.06);
+          overflow: hidden;
         }
 
         .status-indicator {
@@ -224,17 +271,26 @@ export default function Sidebar() {
         }
 
         .status-dot {
+          min-width: 8px;
           width: 8px;
           height: 8px;
           background: #00ff88;
           border-radius: 50%;
           box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+          flex-shrink: 0;
         }
 
         .status-text {
           font-family: "Montserrat", sans-serif;
           font-size: 0.75rem;
           color: #666666;
+          white-space: nowrap;
+          opacity: 0;
+          transition: opacity 0.15s ease;
+        }
+
+        .sidebar:hover .status-text {
+          opacity: 1;
         }
       `}</style>
 

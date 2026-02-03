@@ -72,7 +72,7 @@ export default function GridBackground() {
     <canvas
       ref={canvasRef}
       id="webgl-canvas"
-      className="fixed inset-0 w-full h-full"
+      className="fixed inset-0 w-full h-full bg-black"
     />
   );
 }

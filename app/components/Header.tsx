@@ -1,22 +1,57 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import HomePageButton from "./HomePageButton";
+import Loading from "./Loading";
 
 interface HeaderProps {
   userEmail?: string;
+  userRole?: string;
 }
 
-export default function Header({ userEmail }: HeaderProps) {
+export default function Header({ userEmail, userRole = "user" }: HeaderProps) {
+  const isAdmin = userRole === "admin";
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
+  useEffect(() => {
+    router.prefetch("/");
+  }, [router]);
+
   const handleLogout = async () => {
+    setIsLoggingOut(true);
     await supabase.auth.signOut();
-    router.push("/");
-    router.refresh();
+
+    setTimeout(() => {
+      router.push("/");
+      router.refresh();
+    }, 2000);
   };
+
+  if (isLoggingOut) {
+    return (
+      <div className="logout-loading-overlay">
+        <style jsx>{`
+          .logout-loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+          }
+        `}</style>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -34,9 +69,9 @@ export default function Header({ userEmail }: HeaderProps) {
           backdrop-filter: blur(10px);
           position: fixed;
           top: 0;
-          left: 240px;
+          left: 0;
           right: 0;
-          z-index: 100;
+          z-index: 300;
         }
 
         .header-left {
@@ -147,6 +182,28 @@ export default function Header({ userEmail }: HeaderProps) {
           white-space: nowrap;
         }
 
+        .role-badge {
+          font-family: "Montserrat", sans-serif;
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.35rem;
+        }
+
+        .role-badge.admin {
+          background: linear-gradient(135deg, rgba(255, 170, 0, 0.2) 0%, rgba(255, 100, 0, 0.2) 100%);
+          color: #ffaa00;
+          border: 1px solid rgba(255, 170, 0, 0.3);
+        }
+
+        .role-badge.user {
+          background: rgba(0, 255, 255, 0.1);
+          color: #00ffff;
+          border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
       `}</style>
 
       <header className="header">
@@ -170,6 +227,9 @@ export default function Header({ userEmail }: HeaderProps) {
         </div>
 
         <div className="header-right">
+          <span className={`role-badge ${isAdmin ? "admin" : "user"}`}>
+            {isAdmin ? "Admin" : "User"}
+          </span>
           <div className="user-info">
             <div className="user-avatar">
               {userEmail ? userEmail.charAt(0).toUpperCase() : "U"}
