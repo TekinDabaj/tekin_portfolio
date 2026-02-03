@@ -91,7 +91,7 @@ export default function Sidebar() {
         @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
         .sidebar {
-          width: 72px;
+          width: 56px;
           height: calc(100vh - 64px);
           background: #0a0a0a;
           border-right: 1px solid rgba(255, 255, 255, 0.06);
@@ -106,15 +106,15 @@ export default function Sidebar() {
         }
 
         .sidebar:hover {
-          width: 240px;
+          width: 200px;
         }
 
         .sidebar-header {
-          padding: 1.25rem;
+          padding: 1rem 0.75rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.06);
           display: flex;
           align-items: center;
-          min-height: 65px;
+          min-height: 56px;
         }
 
         .logo {
@@ -175,7 +175,7 @@ export default function Sidebar() {
           color: #555555;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          padding: 0 1.25rem;
+          padding: 0 1rem;
           margin-bottom: 0.5rem;
           white-space: nowrap;
           opacity: 0;
@@ -194,8 +194,8 @@ export default function Sidebar() {
           display: flex;
           align-items: center;
           gap: 0.75rem;
-          padding: 0.65rem 1.25rem;
-          margin: 0.15rem 0.5rem;
+          padding: 0.6rem 1rem;
+          margin: 0.15rem 0.4rem;
           border-radius: 0.5rem;
           cursor: pointer;
           transition: all 0.15s ease;
@@ -259,7 +259,7 @@ export default function Sidebar() {
         }
 
         .sidebar-footer {
-          padding: 1rem 1.25rem;
+          padding: 0.85rem 1rem;
           border-top: 1px solid rgba(255, 255, 255, 0.06);
           overflow: hidden;
         }

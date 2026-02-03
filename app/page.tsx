@@ -17,6 +17,20 @@ export default function Home() {
     }, 2000);
   };
 
+  const handleAboutClick = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      router.push("/about");
+    }, 2000);
+  };
+
+  const handleServicesClick = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      router.push("/services");
+    }, 2000);
+  };
+
   if (isLoading) {
     return (
       <div className="relative w-full h-screen bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(0,0,0,0.5)_200%)] flex items-center justify-center">
@@ -34,8 +48,8 @@ export default function Home() {
           TEKOWORLD
         </h1>
         <div className="flex gap-4 mt-8">
-          <HomePageButton>Services</HomePageButton>
-          <HomePageButton>About Us</HomePageButton>
+          <HomePageButton onClick={handleServicesClick}>Services</HomePageButton>
+          <HomePageButton onClick={handleAboutClick}>About Us</HomePageButton>
           <HomePageButton onClick={handleLoginClick}>Dashboard Login</HomePageButton>
         </div>
       </div>
